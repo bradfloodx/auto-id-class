@@ -8,10 +8,6 @@
       "auto_class_id",
       "sublime auto id class"
   ],
-  "activationCommands": {
-    "atom-editor": "auto-id-class:auto_id",
-    "atom-editor": "auto-id-class:auto_class"
-  },
   "repository": "https://github.com/bradleyflood/auto-id-class",
   "license": "MIT",
   "engines": {

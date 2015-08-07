@@ -5,18 +5,18 @@ module.exports = AutoIdClass =
 
   activate: (state) ->
     @subscriptions = new CompositeDisposable
-    @subscriptions.add atom.commands.add 'atom-editor', 'auto-id-class:auto_id': => @auto_id()
-    @subscriptions.add atom.commands.add 'atom-editor', 'auto-id-class:auto_class': => @auto_class()
+    @subscriptions.add atom.commands.add 'atom-text-editor', 'auto-id-class:insert_id_attribute': => @insert_id_attribute()
+    @subscriptions.add atom.commands.add 'atom-text-editor', 'auto-id-class:insert_class_attribute': => @insert_class_attribute()
 
   deactivate: ->
     @subscriptions.dispose()
 
-  auto_id: ->
+  insert_id_attribute: ->
     editor = atom.workspace.getActiveTextEditor()
-    console.log 'auto_id activated'
+    console.log 'insert_id_attribute fired'
     editor.insertText(' id=""')
 
-  auto_class: ->
+  insert_class_attribute: ->
     editor = atom.workspace.getActiveTextEditor()
-    console.log 'auto_class activated'
+    console.log 'insert_class_attribute fired'
     editor.insertText(' class=""')

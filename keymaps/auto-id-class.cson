@@ -7,6 +7,6 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
-'atom-editor':
-  'ctrl-alt-i': 'auto-id-class:auto_id'
-  'ctrl-alt-c': 'auto-id-class:auto_class'
+'atom-text-editor':
+  'ctrl-3': 'auto-id-class:insert_id_attribute'
+  'ctrl-.': 'auto-id-class:insert_class_attribute'
