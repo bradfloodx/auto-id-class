@@ -7,5 +7,6 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
-'atom-workspace':
-  'ctrl-alt-o': 'auto-id-class:toggle'
+'atom-editor':
+  'ctrl-alt-i': 'auto-id-class:auto_id'
+  'ctrl-alt-c': 'auto-id-class:auto_class'
