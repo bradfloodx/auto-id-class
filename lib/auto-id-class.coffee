@@ -1,6 +1,6 @@
 {CompositeDisposable} = require 'atom'
 
-module.exports = AutoIdClass =
+module.exports =
   subscriptions: null
 
   activate: (state) ->
