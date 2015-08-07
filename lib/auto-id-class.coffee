@@ -11,13 +11,13 @@ module.exports =
   deactivate: ->
     @subscriptions.dispose()
 
-  insert_id_attribute: ->
+  insert_id_attribute ->
     if @cursor_inside_html_tag()
       @insert_attribute('id')
     else
       evnt.abortKeyBinding()
 
-  insert_class_attribute: ->
+  insert_class_attribute ->
     if @cursor_inside_html_tag()
       @insert_attribute('class')
     else
@@ -26,8 +26,12 @@ module.exports =
   cursor_inside_html_tag: ->
     # Get contents of current line to evaluate if within HTML tag.
     # TODO: support multiple cursors.
-    currentLine = atom.workspace.getActiveTextEditor().cursors[0].getCurrentBufferLine()
+    cursor = atom.workspace.getActiveTextEditor().cursors[0]
+    console.log(cursor)
+    currentLine = cursor.getCurrentBufferLine()
     console.log(currentLine)
+    bufferPos = cursor.getBufferPosition
+    console.log(bufferPos)
     return true
 
   insert_attribute: ->
