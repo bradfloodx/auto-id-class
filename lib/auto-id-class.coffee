@@ -1,27 +1,40 @@
 {CompositeDisposable} = require 'atom'
 
-module.exports =
+module.exports = AutoIdClass =
   subscriptions: null
 
   activate: (state) ->
     @subscriptions = new CompositeDisposable
-    @subscriptions.add atom.commands.add 'atom-text-editor', 'auto-id-class:insert_id_attribute': => @insert_id_attribute(evnt)
-    @subscriptions.add atom.commands.add 'atom-text-editor', 'auto-id-class:insert_class_attribute': => @insert_class_attribute(evnt)
+    @subscriptions.add atom.commands.add 'atom-text-editor', 'auto-id-class:insert_id_attribute': => @insert_id_attribute()
+    @subscriptions.add atom.commands.add 'atom-text-editor', 'auto-id-class:insert_class_attribute': => @insert_class_attribute()
 
   deactivate: ->
     @subscriptions.dispose()
 
-  insert_id_attribute ->
-    if @cursor_inside_html_tag()
-      @insert_attribute('id')
-    else
-      evnt.abortKeyBinding()
+  insert_id_attribute: ->
+    editor = atom.workspace.getActiveTextEditor()
+    console.log 'insert_id_attribute fired'
+    editor.insertText(' id=""')
 
-  insert_class_attribute ->
-    if @cursor_inside_html_tag()
-      @insert_attribute('class')
-    else
-      evnt.abortKeyBinding()
+  insert_class_attribute: (action, evnt) ->
+    editor = atom.workspace.getActiveTextEditor()
+    console.log 'insert_class_attribute fired'
+    editor.insertText(' class=""')
+    evnt.abortKeyBinding()
+
+  old_insert_id_attribute: ->
+    console.log('done')
+    # if @cursor_inside_html_tag()
+    #   @insert_attribute('id')
+    # else
+    #   evnt.abortKeyBinding()
+
+  old_insert_class_attribute: ->
+    console.log('done')
+    # if @cursor_inside_html_tag()
+    #   @insert_attribute('class')
+    # else
+    #   evnt.abortKeyBinding()
 
   cursor_inside_html_tag: ->
     # Get contents of current line to evaluate if within HTML tag.
