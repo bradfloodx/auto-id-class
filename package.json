@@ -1,14 +1,14 @@
 {
   "name": "auto-id-class",
   "main": "./lib/auto-id-class",
-  "version": "0.0.0",
-  "description": "A short description of your package",
+  "version": "0.1.0",
+  "description": "Emulate Sublime Text's `auto_id_class` setting allowing shortcuts of `.` and `#` in HTML tags to create ` class=""` and ` id=""` respectively.",
   "keywords": [
   ],
   "activationCommands": {
     "atom-workspace": "auto-id-class:toggle"
   },
-  "repository": "https://github.com/atom/auto-id-class",
+  "repository": "https://github.com/bradleyflood/auto-id-class",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
