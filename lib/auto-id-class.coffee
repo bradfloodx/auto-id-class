@@ -13,6 +13,7 @@ module.exports = AutoIdClass =
 
   insert_id_attribute: ->
     editor = atom.workspace.getActiveTextEditor()
+    cursor = editor.getLastCursor()
     console.log 'insert_id_attribute fired'
     editor.insertText(' id=""')
 
