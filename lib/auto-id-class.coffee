@@ -21,18 +21,52 @@ module.exports = AutoIdClass =
     else
       event.abortKeyBinding()
 
-  deactivate: ->
-    @subscriptions.dispose()
-
+  ###
+  Check if the cursor is within an HTML tag
+  ###
   cursor_inside_html_tag: ->
+    # Grab details of the current cursor and buffer line
+    # TODO: Support multiple lines
     cursor = atom.workspace.getActiveTextEditor().cursors[0]
-    currentLine = cursor.getCurrentBufferLine()
-    console.log(currentLine)
-    bufferPos = cursor.getBufferPosition
-    console.log(bufferPos)
+    bufferLine = cursor.getCurrentBufferLine()
+    cursorColumn = cursor.getBufferPosition().column
+
+    # Split the current buffer line left and right for evalation
+    # to determine if within an HTML tag or not
+    codeLeftOfColumn = bufferLine.substring(0, cursorColumn)
+    codeRightOfColumn = bufferLine.substring(cursorColumn, bufferLine.length)
+
+    console.log(codeLeftOfColumn)
+    console.log(codeRightOfColumn)
+    console.log(codeLeftOfColumn.lastIndexOf('"') + '-' + codeLeftOfColumn.lastIndexOf('='))
+
+    # Is the cursor within HTML opening and closing tags? Exit if not
+    if(codeLeftOfColumn.lastIndexOf('<') <= codeLeftOfColumn.lastIndexOf('>'))
+      return false
+    if(codeRightOfColumn.lastIndexOf('>') <= codeRightOfColumn.lastIndexOf('<'))
+      return false
+
+    # Is the cursor already within "quotes"?
+    # Test by looking for a quote after an =
+    if(codeLeftOfColumn.lastIndexOf('"') > 0)
+      if(codeLeftOfColumn.lastIndexOf('"') < codeLeftOfColumn.lastIndexOf('=') + 2)
+        return false
+
+    # Seems to be, lets do it
     return true
 
+
+  ###
+  Insert attribute by string
+  ###
   insert_attribute: (attrType) ->
-    console.log '@insert attribute ' + attrType
     editor = atom.workspace.getActiveTextEditor()
     editor.insertText ' ' + attrType + '=""'
+    atom.workspace.getActiveTextEditor().cursors[0].moveLeft(1)
+
+
+  ###
+  Deactivate
+  ###
+  deactivate: ->
+  @subscriptions.dispose()
