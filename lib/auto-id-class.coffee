@@ -52,10 +52,7 @@ module.exports = AutoIdClass =
 
     # Get cursos position and scope
     cursorBufferPos = cursor.getBufferPosition()
-    cursorColumn = cursorBufferPos.column
     cursorScopes = editor.scopeDescriptorForBufferPosition(cursorBufferPos).scopes
-
-    console.log(cursorScopes)
 
     # Checking scope strings against the scope descriptions -- Is there a cleaner way?
     # Check if cursor within HTML scope description.
@@ -73,7 +70,8 @@ module.exports = AutoIdClass =
 
     # Finally is the cursor truly within an html tag? Check for < and > chars
 
-    # Get the cursors current line of buffer for evaluation
+    # Get the cursors current column and line of buffer for evaluation
+    cursorColumn = cursorBufferPos.column
     bufferLine = cursor.getCurrentBufferLine()
     codeLeftOfColumn = bufferLine.substring(0, cursorColumn)
     codeRightOfColumn = bufferLine.substring(cursorColumn, bufferLine.length)
@@ -90,7 +88,7 @@ module.exports = AutoIdClass =
       if(codeLeftOfColumn.lastIndexOf('"') < codeLeftOfColumn.lastIndexOf('=') + 2)
         return false
 
-    # TODO: check if cursos within { curly braces } within an html tag and return false
+    # TODO: check if cursor within { curly braces } within an html tag and return false
     # as this can be very annoying when trying to use . and # within Angular tags
 
     # Made it this far? Must be worthy of a class or id attribute

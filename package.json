@@ -2,7 +2,7 @@
   "name": "auto-id-class",
   "main": "./lib/auto-id-class",
   "version": "0.1.0",
-  "description": "Emulate Sublime Text's `auto_id_class` setting allowing shortcuts of `.` and `#` in HTML tags to create ` class=\"\"` and ` id=\"\"` respectively.",
+  "description": "HTML class and id shortcuts. Emulates Sublime Text's auto_id_class feature.",
   "keywords": [
       "auto_id_class",
       "auto_class_id",
