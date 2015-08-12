@@ -1,3 +1,6 @@
+#### 0.2.4
+ - Remove quotes checking logic (handled by cursor scope instead)
+
 #### 0.2.3
  - More instructions in readme
 

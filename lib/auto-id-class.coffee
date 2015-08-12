@@ -50,7 +50,7 @@ module.exports = AutoIdClass =
     editor = atom.workspace.getActiveTextEditor()
     cursor = editor.cursors[0] # TODO: Support multiple cursors
 
-    # Get cursos position and scope
+    # Get cursor position and scope
     cursorBufferPos = cursor.getBufferPosition()
     cursorScopes = editor.scopeDescriptorForBufferPosition(cursorBufferPos).scopes
 
@@ -68,8 +68,7 @@ module.exports = AutoIdClass =
       when "string.quoted.double.html" then return false
       when "entity.other.attribute-name.html" then return false
 
-    # Finally is the cursor truly within an html tag? Check for < and > chars
-
+    # Finally is the cursor truly within an html tag? Check for < and > chars now
     # Get the cursors current column and line of buffer for evaluation
     cursorColumn = cursorBufferPos.column
     bufferLine = cursor.getCurrentBufferLine()
@@ -81,12 +80,6 @@ module.exports = AutoIdClass =
       return false
     if(codeRightOfColumn.lastIndexOf('>') <= codeRightOfColumn.lastIndexOf('<'))
       return false
-
-    # Is the cursor already within "quotes"?
-    # Test by looking for a quote after an =
-    if(codeLeftOfColumn.lastIndexOf('"') > 0)
-      if(codeLeftOfColumn.lastIndexOf('"') < codeLeftOfColumn.lastIndexOf('=') + 2)
-        return false
 
     # TODO: check if cursor within { curly braces } within an html tag and return false
     # as this can be very annoying when trying to use . and # within Angular tags

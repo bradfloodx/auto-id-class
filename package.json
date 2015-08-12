@@ -6,7 +6,9 @@
   "keywords": [
     "auto_id_class",
     "auto_class_id",
-    "sublime auto id class"
+    "sublime auto id class",
+    "html class shortcut",
+    "html id shortcut"
   ],
   "repository": "https://github.com/bradleyflood/auto-id-class",
   "license": "MIT",
