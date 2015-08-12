@@ -1,7 +1,6 @@
 # ----------------------------------------------------------------------------
 #  auto id class
 # ----------------------------------------------------------------------------
-
 {CompositeDisposable} = require 'atom'
 
 module.exports = AutoIdClass =
@@ -15,8 +14,10 @@ module.exports = AutoIdClass =
   ###
   activate: (state) ->
     @subscriptions = new CompositeDisposable
-    @subscriptions.add atom.commands.add 'atom-text-editor', 'auto-id-class:insert_id_attribute': => @insert_id_attribute()
-    @subscriptions.add atom.commands.add 'atom-text-editor', 'auto-id-class:insert_class_attribute': => @insert_class_attribute()
+    @subscriptions.add atom.commands.add 'atom-text-editor',
+      'auto-id-class:insert_id_attribute': => @insert_id_attribute()
+    @subscriptions.add atom.commands.add 'atom-text-editor',
+      'auto-id-class:insert_class_attribute': => @insert_class_attribute()
 
 
   ###
@@ -45,27 +46,54 @@ module.exports = AutoIdClass =
   ###
   cursor_inside_html_tag: ->
 
-    # Grab details of the current cursor
+    # Get editor and cursor
     editor = atom.workspace.getActiveTextEditor()
     cursor = editor.cursors[0] # TODO: Support multiple cursors
-    cursorScopes = editor.scopeDescriptorForBufferPosition(cursor.getBufferPosition()).scopes
+
+    # Get cursos position and scope
+    cursorBufferPos = cursor.getBufferPosition()
+    cursorColumn = cursorBufferPos.column
+    cursorScopes = editor.scopeDescriptorForBufferPosition(cursorBufferPos).scopes
 
     console.log(cursorScopes)
 
-    # Checking strings against the scope descriptions -- Is there a cleaner way?
+    # Checking scope strings against the scope descriptions -- Is there a cleaner way?
     # Check if cursor within HTML scope description.
-    if cursorScopes[0] != 'text.html.basic'
+    if cursorScopes[0] && cursorScopes[0].search('text.html') < 0
       return false
 
     # Within tag types:
-    if cursorScopes[1].search('meta\.tag\..*\.html') < 0
+    if cursorScopes[1] && cursorScopes[1].search('meta\.tag\..*\.html') < 0
       return false
 
-    # Invalid positions:
+    # Invalid cursor scope positions:
     switch cursorScopes[2]
       when "string.quoted.double.html" then return false
+      when "entity.other.attribute-name.html" then return false
 
-    # Made it this far? Must be worthy of a class or id
+    # Finally is the cursor truly within an html tag? Check for < and > chars
+
+    # Get the cursors current line of buffer for evaluation
+    bufferLine = cursor.getCurrentBufferLine()
+    codeLeftOfColumn = bufferLine.substring(0, cursorColumn)
+    codeRightOfColumn = bufferLine.substring(cursorColumn, bufferLine.length)
+
+    # Is the cursor within HTML opening and closing tags? Exit if not
+    if(codeLeftOfColumn.lastIndexOf('<') <= codeLeftOfColumn.lastIndexOf('>'))
+      return false
+    if(codeRightOfColumn.lastIndexOf('>') <= codeRightOfColumn.lastIndexOf('<'))
+      return false
+
+    # Is the cursor already within "quotes"?
+    # Test by looking for a quote after an =
+    if(codeLeftOfColumn.lastIndexOf('"') > 0)
+      if(codeLeftOfColumn.lastIndexOf('"') < codeLeftOfColumn.lastIndexOf('=') + 2)
+        return false
+
+    # TODO: check if cursos within { curly braces } within an html tag and return false
+    # as this can be very annoying when trying to use . and # within Angular tags
+
+    # Made it this far? Must be worthy of a class or id attribute
     return true
 
 
@@ -74,7 +102,12 @@ module.exports = AutoIdClass =
   ###
   insert_attribute: (attrType) ->
     editor = atom.workspace.getActiveTextEditor()
+
+    # Insert space, attribute and =""
+    # TODO: Don't add space char if already present
     editor.insertText ' ' + attrType + '=""'
+
+    # Move cursor back into quotes "|"
     atom.workspace.getActiveTextEditor().cursors[0].moveLeft(1)
 
 
