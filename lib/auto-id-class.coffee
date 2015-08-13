@@ -48,7 +48,8 @@ module.exports = AutoIdClass =
 
     # Get editor and cursor
     editor = atom.workspace.getActiveTextEditor()
-    cursor = editor.cursors[0] # TODO: Support multiple cursors
+    if editor.cursors then cursor = editor.cursors[0] else return false
+    # TODO: Support multiple cursors
 
     # Get cursor position and scope
     cursorBufferPos = cursor.getBufferPosition()

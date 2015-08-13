@@ -1,3 +1,6 @@
+#### 0.2.5
+ - Fix cursor bug when entering content in file name/path dialog
+
 #### 0.2.4
  - Remove quotes checking logic (handled by cursor scope instead)
 
