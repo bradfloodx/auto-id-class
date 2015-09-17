@@ -1,3 +1,6 @@
+### 0.2.6
+ - Fix bug #2
+
 #### 0.2.5
  - Fix cursor bug when entering content in file name/path dialog
 

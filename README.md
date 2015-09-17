@@ -10,8 +10,3 @@ With your cursor in an HTML tag `.` will add ` class=""` and `#` will add ` id="
 apm install auto-id-class
 ```
 Or search `auto id class` in Atom's *Settings -> Install*
-
-### TODO
-- Add Tests
-- Support multiple lines
-- Detect `{` and `}` for Angular use

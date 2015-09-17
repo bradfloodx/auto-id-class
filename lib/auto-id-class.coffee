@@ -46,17 +46,19 @@ module.exports = AutoIdClass =
   ###
   cursor_inside_html_tag: ->
 
-    # Get editor and cursor
+    # Get editor
     editor = atom.workspace.getActiveTextEditor()
+    if !editor then return false;
+
+    # Get cursor
     if editor.cursors then cursor = editor.cursors[0] else return false
-    # TODO: Support multiple cursors
 
     # Get cursor position and scope
     cursorBufferPos = cursor.getBufferPosition()
     cursorScopes = editor.scopeDescriptorForBufferPosition(cursorBufferPos).scopes
 
-    # Checking scope strings against the scope descriptions -- Is there a cleaner way?
-    # Check if cursor within HTML scope description.
+    # Checking scope strings against the scope descriptions.
+    # First, check if cursor within HTML scope description:
     if cursorScopes[0] && cursorScopes[0].search('text.html') < 0
       return false
 
@@ -76,7 +78,7 @@ module.exports = AutoIdClass =
     codeLeftOfColumn = bufferLine.substring(0, cursorColumn)
     codeRightOfColumn = bufferLine.substring(cursorColumn, bufferLine.length)
 
-    # Is the cursor within HTML opening and closing tags? Exit if not
+    # Is the cursor within < and > ? Exit if not
     if(codeLeftOfColumn.lastIndexOf('<') <= codeLeftOfColumn.lastIndexOf('>'))
       return false
     if(codeRightOfColumn.lastIndexOf('>') <= codeRightOfColumn.lastIndexOf('<'))
