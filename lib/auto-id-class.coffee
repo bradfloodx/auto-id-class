@@ -24,7 +24,7 @@ module.exports = AutoIdClass =
   # Insert ID attribute method
   ###
   insert_id_attribute: ->
-    if @cursor_inside_html_tag()
+    if @cursor_inside_html_tag() || @cursor_inside_jsx_html_tag()
       @insert_attribute('id')
     else
       event.abortKeyBinding()
@@ -36,6 +36,8 @@ module.exports = AutoIdClass =
   insert_class_attribute: ->
     if @cursor_inside_html_tag()
       @insert_attribute('class')
+    else if @cursor_inside_jsx_html_tag()
+      @insert_attribute('className')
     else
       event.abortKeyBinding()
 
@@ -48,7 +50,7 @@ module.exports = AutoIdClass =
 
     # Get editor
     editor = atom.workspace.getActiveTextEditor()
-    if !editor then return false;
+    if !editor then return false
 
     # Get cursor
     if editor.cursors then cursor = editor.cursors[0] else return false
@@ -90,6 +92,49 @@ module.exports = AutoIdClass =
     # Made it this far? Must be worthy of a class or id attribute
     return true
 
+
+  cursor_inside_jsx_html_tag: ->
+
+    # Get editor
+    editor = atom.workspace.getActiveTextEditor()
+    if !editor then return false
+
+    # Get cursor
+    if editor.cursors then cursor = editor.cursors[0] else return false
+
+    # Get cursor position and scope
+    cursorBufferPos = cursor.getBufferPosition()
+    cursorScopes = editor.scopeDescriptorForBufferPosition(cursorBufferPos).scopes
+
+    # Checking scope strings against the scope descriptions.
+    # First, check if cursor within HTML scope description:
+    if cursorScopes[0] && cursorScopes[0].search('source.js') < 0
+      return false
+
+    # Within tag types:
+    if cursorScopes[3] && cursorScopes[3].search('meta\.tag\.jsx') < 0
+      return false
+
+    # Invalid cursor scope positions:
+    if cursorScopes[5]
+      switch cursorScopes[5]
+        when "string.quoted.double.js" then return false
+        when "entity.other.attribute-name.js" then return false
+
+    # Finally is the cursor truly within an html tag? Check for < and > chars now
+    # Get the cursors current column and line of buffer for evaluation
+    cursorColumn = cursorBufferPos.column
+    bufferLine = cursor.getCurrentBufferLine()
+    codeLeftOfColumn = bufferLine.substring(0, cursorColumn)
+    codeRightOfColumn = bufferLine.substring(cursorColumn, bufferLine.length)
+
+    # Is the cursor within < and > ? Exit if not
+    if(codeLeftOfColumn.lastIndexOf('<') <= codeLeftOfColumn.lastIndexOf('>'))
+      return false
+    if(codeRightOfColumn.lastIndexOf('>') <= codeRightOfColumn.lastIndexOf('<'))
+      return false
+
+    return true
 
   ###
   # Insert attribute by string
