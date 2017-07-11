@@ -2,7 +2,7 @@
   "name": "auto-id-class",
   "main": "./lib/auto-id-class",
   "version": "0.3.0",
-  "description": "HTML class and id shortcuts. Emulates Sublime Text's auto_id_class feature.",
+  "description": "HTML class='' and id='' shortcuts via . and # emulating Sublime Text's auto_id_class feature.",
   "keywords": [
     "auto_id_class",
     "auto_class_id",
