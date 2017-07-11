@@ -1,6 +1,6 @@
 {
   "name": "auto-id-class",
-  "main": "./lib/auto-id-class",
+  "main": "./lib/auto-id-class.js",
   "version": "0.3.0",
   "description": "HTML class='' and id='' shortcuts via . and # emulating Sublime Text's auto_id_class feature.",
   "keywords": [
