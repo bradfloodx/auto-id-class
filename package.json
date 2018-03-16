@@ -1,8 +1,16 @@
 {
   "name": "auto-id-class",
-  "main": "./lib/auto-id-class.js",
   "version": "0.3.1",
   "description": "HTML class='' and id='' shortcuts via . and # emulating Sublime Text's auto_id_class feature.",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "repository": "https://github.com/bradleyflood/auto-id-class",
+  "main": "./lib/auto-id-class.js",
+  "scripts": {
+    "format": "prettier --trailing-comma es5 --single-quote --write 'lib/*/*.js'"
+  },
   "keywords": [
     "auto_id_class",
     "auto_class_id",
@@ -10,10 +18,13 @@
     "html class shortcut",
     "html id shortcut"
   ],
-  "repository": "https://github.com/bradleyflood/auto-id-class",
-  "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
-  },
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.18.2",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jasmine": "^2.9.3",
+    "eslint-plugin-prettier": "2.6.0",
+    "prettier": "1.11.1"
+  }
 }
