@@ -2,6 +2,7 @@
 
 [![code style: prettier][prettier-img]][prettier-url]
 [![downloads per month][downloads-img]][downloads-url]
+[![All Contributors][contributors-img]][contributors-url]
 [![licence][licence-img]][licence-url]
 
 HTML `class` and `id` shortcuts. Emulates Sublime Text's `auto_id_class` feature.
@@ -48,4 +49,6 @@ Copyright © 2015-2018 Bradley Flood
 [downloads-url]: https://atom.io/packages/
 [licence-img]: https://img.shields.io/apm/l/auto-id-class.svg?style=flat-square
 [licence-url]: https://github.com/bradleyflood/auto-id-class
+[contributors-img]: https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square
+[contributors-url]: #contributors
 [all-contributors-url]: https://github.com/kentcdodds/all-contributors
