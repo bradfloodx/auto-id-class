@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.4.0] - 2018-03-16
+## [0.4.0] - 2018-03-24
 
 ### Fixed
 
@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * updated CHANGELOG to follow keepachangelog.com format - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
 * added diff links to CHANGELOG - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
 * badges to README - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
+* [husky](https://www.npmjs.com/package/husky) to enable [Prettier](https://prettier.io/) to run during as a precommit hook
 
 ## [0.3.1] - 2017-07-11
 
