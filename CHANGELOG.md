@@ -9,19 +9,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-* bug #1 - "Disable in closing tags"
+* https://github.com/bradleyflood/auto-id-class/issues/1 - "Disable in closing tags"
+
+### Added
+
+* disable in doctype tags, that is, within any tag that starts with `<!` (does not affect HTML comments)
+* this plugin will add classes or id's within HTML comments
 
 ## [0.4.0] - 2018-03-24
 
 ### Fixed
 
-* bug #5 - "Disable in erb tags #5" - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
-* bug #8 - "php concatenation inside an html tag" - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
-* bug #9 - "Disable within attribute value quotes" - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
+* https://github.com/bradleyflood/auto-id-class/issues/5 - "Disable in erb tags #5" - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
+* https://github.com/bradleyflood/auto-id-class/issues/8 - "php concatenation inside an html tag" - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
+* https://github.com/bradleyflood/auto-id-class/issues/9 - "Disable within attribute value quotes" - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
 
 ### Added
 
-* .editorconfig
 * set up [Prettier](https://prettier.io/) - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
 * updated CHANGELOG to follow keepachangelog.com format - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
 * added diff links to CHANGELOG - [PR #10](https://github.com/bradleyflood/auto-id-class/pull/10)
