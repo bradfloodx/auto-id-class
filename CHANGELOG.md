@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.7.0] - 2018-03-29
+
+### Fixed
+
+* prevent popup windows from activating the function on the code in the background when dot or hash is typed - [PR #13](https://github.com/bradleyflood/auto-id-class/pull/12)
+
 ## [0.6.0] - 2018-03-28
 
 ### Added
@@ -100,6 +106,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * It works!
 
+[0.7.0]: https://github.com/bradleyflood/auto-id-class/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/bradleyflood/auto-id-class/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/bradleyflood/auto-id-class/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/bradleyflood/auto-id-class/compare/v0.3.1...v0.4.0
