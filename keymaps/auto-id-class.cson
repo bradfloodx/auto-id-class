@@ -7,6 +7,6 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
-'atom-text-editor':
+'atom-text-editor:not([mini])':
   '#': 'auto-id-class:insert_id_attribute'
   '.': 'auto-id-class:insert_class_attribute'
